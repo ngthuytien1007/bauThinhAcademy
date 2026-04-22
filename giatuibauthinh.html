@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giặt Ủi Bầu Thịnh - Sạch Chuẩn Y Khoa, Giao Nhận Tận Tâm</title>
+    
+    <!-- Fonts: Be Vietnam Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons: Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Be Vietnam Pro"', 'sans-serif'],
+                    },
+                    colors: {
+                        bauthinh: {
+                            blue: '#0EA5E9',   // Xanh Blue Sky
+                            dark: '#0284C7',
+                            gold: '#F59E0B',   // Vàng Gold nhẹ
+                            light: '#F0F9FF',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        
+        /* Glassmorphism */
+        .glass { 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.3); 
+        }
+        
+        /* Hero Pattern Background */
+        .hero-pattern { 
+            background-image: linear-gradient(to right, rgba(14, 165, 233, 0.95), rgba(2, 132, 199, 0.85)), url('https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?q=80&w=2000&auto=format&fit=crop'); 
+            background-size: cover; 
+            background-position: center; 
+        }
+        
+        /* Cards Hover */
+        .service-card { transition: all 0.3s ease; }
+        .service-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); 
+        }
+        
+        /* Nút rung Call / Zalo */
+        @keyframes pulse-ring { 
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.7); } 
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(14, 165, 233, 0); } 
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); } 
+        }
+        .btn-pulse { animation: pulse-ring 2s infinite; }
+        .btn-pulse-green { animation: pulse-ring 2s infinite; animation-delay: 1s; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+        @keyframes pulse-ring-green {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); } 
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); } 
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } 
+        }
+        .bg-green-500.btn-pulse { animation-name: pulse-ring-green; }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- Header (Sticky) -->
+    <header class="fixed top-0 w-full z-50 glass transition-all duration-300" id="header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <span class="material-symbols-outlined text-bauthinh-blue text-4xl group-hover:rotate-12 transition-transform">local_laundry_service</span>
+                    <div>
+                        <h1 class="font-bold text-2xl tracking-tight text-gray-900 leading-none">Bầu Thịnh</h1>
+                        <p class="text-[10px] text-bauthinh-blue font-semibold tracking-widest uppercase mt-0.5">Premium Laundry</p>
+                    </div>
+                </a>
+                
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#dich-vu" class="text-sm font-semibold text-gray-700 hover:text-bauthinh-blue transition">Dịch Vụ</a>
+                    <a href="#chuyen-biet" class="text-sm font-semibold text-gray-700 hover:text-bauthinh-blue transition">Chuyên Biệt</a>
+                    <a href="#combo" class="text-sm font-semibold text-gray-700 hover:text-bauthinh-blue transition">Ưu Đãi</a>
+                    <a href="#hoi-vien" class="text-sm font-semibold text-gray-700 hover:text-bauthinh-blue transition">Hội Viên</a>
+                </nav>
+                
+                <!-- Action Area -->
+                <div class="flex items-center gap-2">
+                    <a href="#dat-lich" class="bg-bauthinh-blue hover:bg-bauthinh-dark text-white px-4 sm:px-6 py-2.5 rounded-full font-semibold shadow-lg shadow-bauthinh-blue/30 transition-all transform hover:-translate-y-0.5 text-sm inline-flex items-center gap-2">
+                        <span class="material-symbols-outlined text-lg hidden sm:block">calendar_month</span>
+                        <span>Đặt Lịch</span>
+                    </a>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="md:hidden text-gray-700 hover:text-bauthinh-blue focus:outline-none p-1">
+                        <span class="material-symbols-outlined text-3xl">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-t border-gray-100 absolute top-full left-0 w-full shadow-lg">
+            <div class="px-4 py-4 space-y-4">
+                <a href="#dich-vu" class="block text-base font-semibold text-gray-800 hover:text-bauthinh-blue mobile-link">Dịch Vụ</a>
+                <a href="#chuyen-biet" class="block text-base font-semibold text-gray-800 hover:text-bauthinh-blue mobile-link">Chuyên Biệt</a>
+                <a href="#combo" class="block text-base font-semibold text-gray-800 hover:text-bauthinh-blue mobile-link">Ưu Đãi</a>
+                <a href="#hoi-vien" class="block text-base font-semibold text-gray-800 hover:text-bauthinh-blue mobile-link">Hội Viên</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="mt-20 hero-pattern min-h-[85vh] flex items-center relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-20">
+            <div class="max-w-2xl text-white">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md mb-8 border border-white/30 text-sm font-medium shadow-sm">
+                    <span class="material-symbols-outlined text-base text-bauthinh-gold">verified</span>
+                    <span>Sạch chuẩn y khoa - Phục vụ tận tâm</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight">
+                    GIẶT ỦI <span class="text-bauthinh-gold">BẦU THỊNH</span>
+                </h2>
+                <p class="text-lg md:text-xl text-blue-50 mb-10 max-w-lg leading-relaxed font-light">
+                    Cách BV Đa khoa Quảng Nam vài bước chân. Dịch vụ chăm sóc chuyên nghiệp và cao cấp dành cho gia đình và y bác sĩ.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#dat-lich" class="bg-bauthinh-gold hover:bg-yellow-500 text-white px-8 py-4 rounded-full font-bold text-lg text-center shadow-lg shadow-yellow-500/30 transition flex justify-center items-center gap-2">
+                        <span class="material-symbols-outlined">local_shipping</span>
+                        Giao nhận tận nơi
+                    </a>
+                    <a href="#dich-vu" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full font-semibold text-lg text-center transition">
+                        Khám phá dịch vụ
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative bg icon -->
+        <div class="absolute -bottom-20 -right-20 p-8 hidden lg:block opacity-[0.03] pointer-events-none transform -rotate-12">
+            <span class="material-symbols-outlined text-[400px] text-white">local_laundry_service</span>
+        </div>
+    </section>
+
+    <!-- Phân Tầng Dịch Vụ (3 Cards) -->
+    <section id="dich-vu" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h3 class="text-bauthinh-blue font-bold tracking-widest uppercase text-xs mb-3">Dịch vụ trọng tâm</h3>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Giải pháp giặt ủi toàn diện</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative items-center">
+                <!-- Gói Bình Dân -->
+                <div class="service-card bg-bauthinh-light rounded-3xl p-8 md:p-10 border border-blue-100 flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-white shadow-sm flex items-center justify-center text-bauthinh-blue mb-6 border border-blue-50">
+                        <span class="material-symbols-outlined text-4xl">shopping_bag</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-4">Gói Tiêu Chuẩn</h4>
+                    <p class="text-gray-600 mb-8 flex-grow leading-relaxed">Giặt sấy theo ký, lấy nhanh trong ngày. Lựa chọn siêu tiết kiệm, lý tưởng cho đồ sinh hoạt thường ngày của gia đình.</p>
+                    <div class="w-full pt-6 border-t border-blue-200">
+                        <div class="text-bauthinh-blue font-bold text-lg">Từ 15.000đ / kg</div>
+                    </div>
+                </div>
+                
+                <!-- Gói Trung Lưu (Highlight) -->
+                <div class="service-card bg-white rounded-3xl p-8 md:p-10 border border-gray-100 shadow-2xl shadow-blue-900/10 flex flex-col items-center text-center relative overflow-hidden transform md:-translate-y-4 z-10">
+                    <div class="absolute top-0 right-0 bg-bauthinh-blue text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl uppercase tracking-wider">Phổ biến nhất</div>
+                    <div class="w-20 h-20 rounded-full bg-blue-50 flex items-center justify-center text-bauthinh-blue mb-6">
+                        <span class="material-symbols-outlined text-4xl">checkroom</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-4">Gói Cao Cấp</h4>
+                    <p class="text-gray-600 mb-8 flex-grow leading-relaxed">Giặt riêng từng máy, sử dụng nước xả cao cấp, gấp xếp nghệ thuật. Giữ nguyên form áo và hương thơm bền lâu.</p>
+                    <div class="w-full pt-6 border-t border-gray-100">
+                        <div class="text-bauthinh-blue font-bold text-lg">Từ 30.000đ / kg</div>
+                    </div>
+                </div>
+                
+                <!-- Gói Cao Cấp (Luxury) -->
+                <div class="service-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 md:p-10 text-white flex flex-col items-center text-center relative overflow-hidden shadow-xl">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-bauthinh-gold rounded-full opacity-20 blur-3xl"></div>
+                    <div class="w-20 h-20 rounded-full bg-gray-800 border-2 border-bauthinh-gold/50 flex items-center justify-center text-bauthinh-gold mb-6 relative z-10">
+                        <span class="material-symbols-outlined text-4xl">dry_cleaning</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-white mb-4 relative z-10">Gói Vip Luxury</h4>
+                    <p class="text-gray-300 mb-8 flex-grow leading-relaxed relative z-10">Giặt hấp (Dry Cleaning), xử lý thủ công cho Vest, Váy dạ hội. Đặc quyền lấy và giao tận giường bệnh/nhà riêng.</p>
+                    <div class="w-full pt-6 border-t border-gray-700 relative z-10">
+                        <div class="text-bauthinh-gold font-bold text-lg">Tính theo Món</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Niche Services (Dịch Vụ Chuyên Biệt) -->
+    <section id="chuyen-biet" class="py-24 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h3 class="text-bauthinh-gold font-bold tracking-widest uppercase text-xs mb-3">Specialized Services</h3>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Chăm sóc tỉ mỉ từng món đồ yêu quý</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Không chỉ giặt quần áo, chúng tôi là chuyên gia trong việc xử lý các vật dụng đặc biệt đòi hỏi yêu cầu kỹ thuật cao và dung dịch làm sạch chuyên dụng.</p>
+            </div>
+            
+            <!-- Grid 2x5 or Responsive -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+                <!-- 1 -->
+                <div class="service-card bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] text-center flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-bauthinh-blue transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-bauthinh-blue group-hover:text-white transition-colors">steps</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Giày Sneaker</h4>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-3">Giặt tay thủ công, dung dịch Jason Markk, sấy diệt khuẩn tia UV.</p>
+                    <span class="text-xs font-bold text-bauthinh-blue mt-auto bg-blue-50 px-3 py-1 rounded-full">Từ 50k</span>
+                </div>
+                <!-- 2 -->
+                <div class="service-card bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] text-center flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-bauthinh-blue transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-bauthinh-blue group-hover:text-white transition-colors">apparel</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Làm mới Áo Da</h4>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-3">Dưỡng da mềm mịn, chống nứt nẻ và ẩm mốc chuyên sâu.</p>
+                    <span class="text-xs font-bold text-bauthinh-blue mt-auto bg-blue-50 px-3 py-1 rounded-full">Từ 150k</span>
+                </div>
+                <!-- 3 -->
+                <div class="service-card bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] text-center flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-bauthinh-blue transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-bauthinh-blue group-hover:text-white transition-colors">toys</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Giặt Gấu Bông</h4>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-3">Sạch sâu lõi bông, sấy khô an toàn tuyệt đối cho bé.</p>
+                    <span class="text-xs font-bold text-bauthinh-blue mt-auto bg-blue-50 px-3 py-1 rounded-full">Từ 40k</span>
+                </div>
+                <!-- 4 -->
+                <div class="service-card bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] text-center flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-bauthinh-blue transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-bauthinh-blue group-hover:text-white transition-colors">sports_motorsports</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Mũ Bảo Hiểm</h4>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-3">Vệ sinh lót trong, khử mùi hôi mồ hôi và vi khuẩn.</p>
+                    <span class="text-xs font-bold text-bauthinh-blue mt-auto bg-blue-50 px-3 py-1 rounded-full">Từ 35k</span>
+                </div>
+                <!-- 5 -->
+                <div class="service-card bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] text-center flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-bauthinh-blue transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-bauthinh-blue group-hover:text-white transition-colors">luggage</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Vali / Túi Xách</h4>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-3">Làm sạch trong ngoài, khử mùi ẩm mốc, giữ form dáng.</p>
+                    <span class="text-xs font-bold text-bauthinh-blue mt-auto bg-blue-50 px-3 py-1 rounded-full">Từ 80k</span>
+                </div>
+                <!-- 6 -->
+                <div class="service-card bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] text-center flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-bauthinh-blue transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-bauthinh-blue group-hover:text-white transition-colors">dry_cleaning</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Váy Cưới / Dạ Hội</h4>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-3">Quy trình giặt hấp nhẹ nhàng, bảo vệ các chi tiết đính kết.</p>
+                    <span class="text-xs font-bold text-bauthinh-blue mt-auto bg-blue-50 px-3 py-1 rounded-full">Liên hệ</span>
+                </div>
+                <!-- 7 -->
+                <div class="service-card bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] text-center flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-bauthinh-blue transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-bauthinh-blue group-hover:text-white transition-colors">checkroom</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Vest & Blazer</h4>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-3">Giặt khô chuyên nghiệp, ủi hơi nước giữ form đứng dáng.</p>
+                    <span class="text-xs font-bold text-bauthinh-blue mt-auto bg-blue-50 px-3 py-1 rounded-full">Từ 60k</span>
+                </div>
+                <!-- 8 -->
+                <div class="service-card bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] text-center flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-bauthinh-blue transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-bauthinh-blue group-hover:text-white transition-colors">bed</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Chăn Lông Cừu/Vũ</h4>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-3">Sấy đảo chiều giúp lông tơi xốp, không vón cục.</p>
+                    <span class="text-xs font-bold text-bauthinh-blue mt-auto bg-blue-50 px-3 py-1 rounded-full">Từ 50k/cái</span>
+                </div>
+                <!-- 9 -->
+                <div class="service-card bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] text-center flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-bauthinh-blue transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-bauthinh-blue group-hover:text-white transition-colors">curtains</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Thảm Trải & Rèm</h4>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-3">Giặt tẩy công nghiệp, xử lý triệt để vết ố và mùi hôi.</p>
+                    <span class="text-xs font-bold text-bauthinh-blue mt-auto bg-blue-50 px-3 py-1 rounded-full">Từ 30k/kg</span>
+                </div>
+                <!-- 10 -->
+                <div class="service-card bg-white p-6 rounded-2xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] text-center flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-bauthinh-blue transition-colors">
+                        <span class="material-symbols-outlined text-3xl text-bauthinh-blue group-hover:text-white transition-colors">child_care</span>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Đồ Em Bé (Baby)</h4>
+                    <p class="text-xs text-gray-500 mb-4 line-clamp-3">Dùng nước giặt Organic không kích ứng, khử trùng nhiệt.</p>
+                    <span class="text-xs font-bold text-bauthinh-blue mt-auto bg-blue-50 px-3 py-1 rounded-full">Từ 25k/kg</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upsell / Combos -->
+    <section id="combo" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h3 class="text-bauthinh-blue font-bold tracking-widest uppercase text-xs mb-3">Upsell Strategy</h3>
+                <h2 class="text-3xl font-bold text-gray-900">Combo Tiết Kiệm Nâng Hạng</h2>
+                <p class="mt-4 text-gray-600 max-w-xl mx-auto">Tận hưởng dịch vụ toàn diện với mức giá ưu đãi khi kết hợp giặt ủi đồ đạc trong nhà.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Combo 1 -->
+                <div class="relative bg-bauthinh-light rounded-3xl p-8 border border-blue-100 flex flex-col">
+                    <div class="absolute -top-3 -left-2 bg-red-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-md transform -rotate-6">-15% Hóa Đơn</div>
+                    <div class="flex items-center gap-3 mb-4 mt-2">
+                        <span class="material-symbols-outlined text-bauthinh-blue text-3xl">all_inclusive</span>
+                        <h4 class="text-xl font-bold text-gray-900">Sạch Toàn Diện</h4>
+                    </div>
+                    <p class="text-gray-600 mb-8 flex-grow">Giặt 5kg quần áo sinh hoạt + Vệ sinh làm mới 1 đôi giày Sneaker/Da.</p>
+                    <a href="#dat-lich" class="w-full py-3 text-center bg-white border-2 border-bauthinh-blue text-bauthinh-blue rounded-xl font-bold hover:bg-blue-50 transition">Chọn Gói Này</a>
+                </div>
+                
+                <!-- Combo 2 -->
+                <div class="relative bg-gradient-to-br from-bauthinh-dark to-bauthinh-blue rounded-3xl p-8 text-white shadow-xl transform md:-translate-y-4 flex flex-col">
+                    <div class="absolute -top-3 right-6 bg-bauthinh-gold text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-md">Được yêu thích nhất</div>
+                    <div class="flex items-center gap-3 mb-4 mt-2">
+                        <span class="material-symbols-outlined text-yellow-300 text-3xl">home_heart</span>
+                        <h4 class="text-xl font-bold">Ấm Áp Gia Đình</h4>
+                    </div>
+                    <p class="text-blue-50 mb-8 flex-grow">Giặt 2 chăn mền lớn + <span class="bg-yellow-400/20 text-yellow-200 px-2 rounded font-semibold underline decoration-dotted">Tặng kèm vệ sinh 1 gấu bông</span> size vừa.</p>
+                    <a href="#dat-lich" class="w-full py-3 text-center bg-bauthinh-gold text-white rounded-xl font-bold hover:bg-yellow-500 transition shadow">Chọn Combo Yêu Thích</a>
+                </div>
+                
+                <!-- Combo 3 -->
+                <div class="bg-teal-50 rounded-3xl p-8 border border-teal-100 flex flex-col">
+                    <div class="inline-block bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full mb-4 self-start">Dành riêng cho Y Bác Sĩ</div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="material-symbols-outlined text-teal-600 text-3xl">medical_services</span>
+                        <h4 class="text-xl font-bold text-gray-900">Phòng Bệnh Sạch Thơm</h4>
+                    </div>
+                    <p class="text-gray-600 mb-8 flex-grow">Giặt sấy đồ ký thông thường + Hấp chuẩn y khoa khử trùng cho 2 bộ Blouse.</p>
+                    <a href="#dat-lich" class="w-full py-3 text-center bg-white border-2 border-teal-500 text-teal-700 rounded-xl font-bold hover:bg-teal-50 transition">Chọn Gói Này</a>
+                </div>
+            </div>
+            
+            <!-- Extra Add-ons -->
+            <div class="mt-16 max-w-4xl mx-auto bg-gray-50 rounded-2xl p-6 md:p-8 border border-dashed border-gray-300">
+                <h4 class="font-bold text-gray-900 mb-5 flex items-center gap-2 text-lg">
+                    <span class="material-symbols-outlined text-bauthinh-gold">add_circle</span>
+                    Tiện Ích Thêm (Add-ons)
+                </h4>
+                <div class="flex flex-col sm:flex-row flex-wrap gap-4">
+                    <div class="flex items-center gap-3 bg-white px-5 py-3 border border-gray-200 rounded-xl flex-1">
+                        <span class="material-symbols-outlined text-pink-400">local_florist</span>
+                        <div>
+                            <p class="text-sm font-bold text-gray-800">Nước xả cao cấp</p>
+                            <p class="text-xs text-gray-500">+5.000đ/lượt</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white px-5 py-3 border border-gray-200 rounded-xl flex-1">
+                        <span class="material-symbols-outlined text-indigo-400">inventory_2</span>
+                        <div>
+                            <p class="text-sm font-bold text-gray-800">Hút chân không/Đóng quà</p>
+                            <p class="text-xs text-gray-500">+10.000đ/món</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white px-5 py-3 border border-red-200 bg-red-50 rounded-xl flex-1">
+                        <span class="material-symbols-outlined text-red-500">bolt</span>
+                        <div>
+                            <p class="text-sm font-bold text-red-700">Lấy siêu tốc trong 2H</p>
+                            <p class="text-xs text-red-500/80">+20% giá trị đơn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hội Viên / Pricing -->
+    <section id="hoi-vien" class="py-24 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 background-pattern" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h3 class="text-bauthinh-gold font-bold tracking-widest uppercase text-xs mb-3">Retention & Cashflow</h3>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Gói Hội Viên Bầu Thịnh</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg">"Khóa" mọi sự lo lắng về việc giặt giũ. Đăng ký một lần, an tâm sử dụng trọn tháng. Giải pháp hoàn hảo cho Nhân viên y tế bận rộn.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-12">
+                <!-- Silver -->
+                <div class="bg-gray-800/80 backdrop-blur rounded-3xl p-8 border border-gray-700 hover:border-gray-500 transition relative flex flex-col">
+                    <h3 class="text-2xl font-bold text-gray-300 mb-2">Thẻ Silver</h3>
+                    <div class="text-5xl font-bold mb-6 text-white flex items-end">
+                        500<span class="text-2xl font-normal text-gray-400 leading-8">k</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-8 border-b border-gray-700 pb-4">Thanh toán trước tiện lợi, không lo lẻ tẻ.</p>
+                    <ul class="space-y-5 mb-8 text-gray-300 flex-grow">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-green-400 text-lg mt-0.5">check_circle</span>
+                            <span class="font-bold text-white">Tặng ngay 50.000đ vào tài khoản</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-green-400 text-lg mt-0.5">check_circle</span>
+                            <span>Miễn phí giao nhận 100% quanh khu vực Bệnh viện</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-gray-600 text-lg mt-0.5">remove</span>
+                            <span class="text-gray-500 line-through">Chưa bao gồm giảm giá Dịch vụ chuyên biệt</span>
+                        </li>
+                    </ul>
+                    <a href="#dat-lich" class="w-full block text-center py-4 rounded-xl border-2 border-gray-500 hover:bg-gray-700 transition font-bold text-white">Đăng Ký Silver</a>
+                </div>
+                
+                <!-- Gold -->
+                <div class="bg-gradient-to-b from-yellow-700/30 to-gray-800 rounded-3xl p-8 border-2 border-bauthinh-gold relative transform md:-translate-y-6 shadow-2xl flex flex-col shadow-yellow-900/30">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-6 py-1.5 rounded-full text-sm font-bold tracking-wider shadow-lg">KHUYÊN DÙNG</div>
+                    <h3 class="text-2xl font-bold text-bauthinh-gold mb-2 mt-2">Thẻ Gold VIP</h3>
+                    <div class="text-5xl font-bold mb-6 text-white flex items-end">
+                        1.000<span class="text-2xl font-normal text-gray-400 leading-8">k</span>
+                    </div>
+                    <p class="text-sm text-yellow-100/60 mb-8 border-b border-gray-700 pb-4">Tối đa quyền lợi, ưu tiên mọi lúc mọi nơi.</p>
+                    <ul class="space-y-5 mb-8 text-gray-200 flex-grow">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-bauthinh-gold text-lg mt-0.5">check_circle</span>
+                            <span class="font-bold text-bauthinh-gold text-lg">Tặng ngay 150.000đ vào tài khoản</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-bauthinh-gold text-lg mt-0.5">check_circle</span>
+                            <span class="font-bold">Giảm 10% cho MỌI Dịch vụ nhỏ lẻ</span> (Giặt giày, túi, da...)
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-bauthinh-gold text-lg mt-0.5">check_circle</span>
+                            <span>Ưu tiên giặt lấy siêu tốc trong 2H không phụ thu</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-bauthinh-gold text-lg mt-0.5">check_circle</span>
+                            <span>Miễn phí giao nhận mọi địa điểm trong Thành phố</span>
+                        </li>
+                    </ul>
+                    <a href="#dat-lich" class="w-full block text-center py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-gray-900 transition font-bold text-lg shadow-lg">Mở Thẻ Gold VIP</a>
+                </div>
+                
+                <!-- Family / Subscription -->
+                <div class="bg-gray-800/80 backdrop-blur rounded-3xl p-8 border border-gray-700 hover:border-gray-500 transition relative flex flex-col">
+                    <h3 class="text-2xl font-bold text-blue-400 mb-2">Thẻ Family Care</h3>
+                    <div class="text-4xl font-bold mb-6 text-white leading-[48px]">Gói Định Kỳ</div>
+                    <p class="text-sm text-gray-500 mb-8 border-b border-gray-700 pb-4">Giữ nhà cửa luôn sạch thơm không cần nhớ lịch.</p>
+                    <ul class="space-y-5 mb-8 text-gray-300 flex-grow">
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-blue-400 text-lg mt-0.5">event_repeat</span>
+                            <span>Đăng ký vệ sinh Rèm/Nệm Sofa định kỳ 6 tháng/lần</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-blue-400 text-lg mt-0.5">loyalty</span>
+                            <span class="font-bold text-white">Giảm 20% tổng bill từ lần thứ 2 trở đi</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-blue-400 text-lg mt-0.5">notifications_active</span>
+                            <span>Hệ thống tự động nhắn tin Zalo nhắc lịch làm sạch</span>
+                        </li>
+                    </ul>
+                    <a href="#dat-lich" class="w-full block text-center py-4 rounded-xl border-2 border-gray-500 hover:bg-gray-700 transition font-bold text-white">Nhận Tư Vấn Đặt Lịch</a>
+                </div>
+            </div>
+            
+            <!-- Loyalty Check Program -->
+            <div class="mt-20 max-w-4xl mx-auto bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl p-8 border border-gray-700 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="text-left flex-1 border-b md:border-b-0 md:border-r border-gray-700 pb-6 md:pb-0 md:pr-8">
+                    <div class="inline-flex items-center gap-2 mb-3 px-3 py-1 bg-white/10 rounded-full">
+                        <span class="material-symbols-outlined text-yellow-400 text-sm">stars</span>
+                        <span class="text-xs font-bold text-yellow-400 tracking-wider">ĐẶC QUYỀN KHÁCH QUEN 5 NĂM</span>
+                    </div>
+                    <h4 class="font-bold text-2xl text-white mb-2">Bạn đã đồng hành cùng Bầu Thịnh?</h4>
+                    <p class="text-sm text-gray-400 leading-relaxed">Nhập số điện thoại để hệ thống kiểm tra điểm tích lũy (10k = 1 điểm). Đủ 50 điểm đổi ngay 1 lần giặt ký hoàn toàn MIỄN PHÍ!</p>
+                </div>
+                <div class="w-full md:w-auto flex flex-col gap-3">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="tel" placeholder="Nhập số điện thoại của bạn..." class="w-full sm:w-64 bg-gray-950 border border-gray-600 rounded-xl px-5 py-3 text-white focus:outline-none focus:border-bauthinh-gold focus:ring-1 focus:ring-bauthinh-gold placeholder-gray-500">
+                        <button class="bg-white text-gray-900 px-6 py-3 rounded-xl font-bold hover:bg-gray-200 transition shadow flex justify-center items-center">
+                            Tra Cứu
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500 text-center sm:text-left">Dữ liệu được tích lũy tự động qua mỗi lần giặt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Generation Form -->
+    <section id="dat-lich" class="py-24 bg-bauthinh-light relative overflow-hidden">
+        <!-- Decor background shape -->
+        <div class="absolute top-0 left-0 w-full h-[300px] bg-gray-900 rounded-b-[100px] md:rounded-b-[200px] z-0 -mt-10"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+                
+                <!-- Info Sidebar -->
+                <div class="w-full md:w-2/5 md:min-w-[400px] bg-gradient-to-br from-bauthinh-dark to-bauthinh-blue text-white p-10 md:p-12 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute inset-0 bg-black/10 opacity-50 hero-pattern" style="background-blend-mode: overlay;"></div>
+                    
+                    <div class="relative z-10">
+                        <h3 class="text-3xl font-bold mb-8">Thông tin liên hệ</h3>
+                        <ul class="space-y-8">
+                            <li class="flex items-start gap-4">
+                                <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm shadow-inner">
+                                    <span class="material-symbols-outlined">location_on</span>
+                                </div>
+                                <div class="pt-1">
+                                    <p class="text-sm leading-relaxed opacity-90">Ngay sát cổng bệnh viện Đa khoa Tỉnh Quảng Nam. Giao nhận siêu tốc 2 phút.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm shadow-inner">
+                                    <span class="material-symbols-outlined">support_agent</span>
+                                </div>
+                                <div class="pt-1">
+                                    <p class="text-sm opacity-80 mb-1">Hotline giao nhận:</p>
+                                    <p class="text-2xl font-bold tracking-wider hover:text-yellow-300 transition cursor-pointer">0795.777.607</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <div class="bg-white/20 p-3 rounded-full backdrop-blur-sm shadow-inner">
+                                    <span class="material-symbols-outlined">schedule</span>
+                                </div>
+                                <div class="pt-1">
+                                    <p class="text-sm opacity-80 mb-1">Giờ hoạt động:</p>
+                                    <p class="font-medium text-lg">06:30 - 21:00</p>
+                                    <p class="text-sm opacity-80">(Mở cửa không nghỉ T7 & CN)</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="w-full md:w-3/5 p-8 md:p-12 bg-white">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Gửi yêu cầu giao nhận</h2>
+                    <p class="text-gray-500 mb-8">Điền thông tin và nhân viên giao nhận sẽ có mặt lấy đồ ngay lập tức!</p>
+                    
+                    <form id="bookingForm" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Họ tên <span class="text-red-500">*</span></label>
+                                <input type="text" id="cusName" required class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-bauthinh-blue focus:border-bauthinh-blue transition bg-gray-50 focus:bg-white text-gray-800 placeholder-gray-400" placeholder="Anh/Chị...">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Số điện thoại <span class="text-red-500">*</span></label>
+                                <input type="tel" id="cusPhone" required pattern="[0-9]{10,11}" class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-bauthinh-blue focus:border-bauthinh-blue transition bg-gray-50 focus:bg-white text-gray-800 placeholder-gray-400" placeholder="09xxxxxxx">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Loại đồ cần gửi giặt <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <select id="cusService" required class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-bauthinh-blue focus:border-bauthinh-blue transition bg-gray-50 focus:bg-white text-gray-800 appearance-none">
+                                    <option value="" disabled selected>Chọn loại đồ đạc...</option>
+                                    <option value="Quần áo sinh hoạt (Giặt ký)">Quần áo sinh hoạt (Giặt ký)</option>
+                                    <option value="Chăn Mền / Drap giường">Chăn Mền / Drap giường</option>
+                                    <option value="Giặt hấp Áo Vest / Váy">Giặt hấp (Áo Vest / Váy dạ hội)</option>
+                                    <option value="Vệ sinh Giày Sneaker / Đồ Da">Vệ sinh Giày Sneaker / Đồ Da</option>
+                                    <option value="Gấu Bông / Phụ kiện">Gấu Bông / Mũ Bảo Hiểm / Vali</option>
+                                    <option value="Đăng ký Hội Viên">Tôi muốn đăng ký Gói Hội Viên</option>
+                                </select>
+                                <span class="material-symbols-outlined absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Ghi chú & Địa chỉ (Số phòng bệnh) <span class="text-red-500">*</span></label>
+                            <textarea id="cusAddress" required rows="3" class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-2 focus:ring-bauthinh-blue focus:border-bauthinh-blue transition bg-gray-50 focus:bg-white resize-none text-gray-800 placeholder-gray-400" placeholder="Vd: Tầng 3, Phòng 302, Khoa Nội, BV Đa khoa... Lấy đồ lúc 2h chiều giúp mình."></textarea>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="w-full bg-bauthinh-blue hover:bg-bauthinh-dark text-white font-bold py-4 md:py-5 rounded-xl shadow-[0_10px_20px_-10px_rgba(14,165,233,0.5)] hover:shadow-[0_15px_25px_-10px_rgba(14,165,233,0.6)] hover:-translate-y-1 transition-all duration-300 flex justify-center items-center gap-2 text-lg uppercase tracking-wide mt-4">
+                            <span class="material-symbols-outlined font-bold">send</span>
+                            Gửi yêu cầu đặt lịch
+                        </button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-400 py-12 md:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4 border-b border-gray-800 pb-10 mb-10">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-bauthinh-blue text-4xl">local_laundry_service</span>
+                    <div>
+                        <h2 class="font-bold text-2xl tracking-tight text-white leading-none">Bầu Thịnh</h2>
+                        <p class="text-[10px] text-gray-500 font-bold tracking-widest uppercase mt-1">Premium Laundry</p>
+                    </div>
+                </div>
+                
+                <div class="flex gap-8">
+                    <a href="#dich-vu" class="hover:text-white transition">Dịch Vụ</a>
+                    <a href="#chuyen-biet" class="hover:text-white transition">Chuyên Biệt</a>
+                    <a href="#hoi-vien" class="hover:text-white transition">Hội Viên</a>
+                </div>
+                
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center hover:bg-blue-600 hover:text-white transition duration-300">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm gap-4">
+                <p>&copy; 2026 Giặt Ủi Bầu Thịnh. All rights reserved.</p>
+                <p class="flex items-center gap-1">Designed with <span class="material-symbols-outlined text-red-500 text-sm">favorite</span> for Bầu Thịnh</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Actions Buttons (Mobile First) -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+        <!-- Zalo -->
+        <a href="https://zalo.me/0795777607" target="_blank" class="w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-blue-500/30 hover:scale-110 transition-transform relative group">
+            <span class="font-bold text-xl z-10 relative">Zalo</span>
+            <span class="absolute right-full mr-4 bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none transform translate-x-2 group-hover:translate-x-0">Chat qua Zalo</span>
+            <div class="absolute inset-0 bg-blue-500 rounded-full btn-pulse"></div>
+        </a>
+        
+        <!-- Hotline / Call -->
+        <a href="tel:0795777607" class="w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 hover:scale-110 transition-transform relative group">
+            <span class="material-symbols-outlined text-3xl z-10 relative">call</span>
+            <span class="absolute right-full mr-4 bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none transform translate-x-2 group-hover:translate-x-0">Giao Nhận Nhanh!</span>
+            <div class="absolute inset-0 bg-green-500 rounded-full btn-pulse-green"></div>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Smooth Header scroll effect (Glassmorphism adjustments)
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if(window.scrollY > 20) {
+                header.classList.add('shadow-md', 'bg-white/95');
+                header.classList.remove('glass');
+            } else {
+                header.classList.remove('shadow-md', 'bg-white/95');
+                header.classList.add('glass');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('.material-symbols-outlined');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.textContent = 'menu';
+                } else {
+                    icon.textContent = 'close';
+                }
+            });
+            
+            // Close menu when clicking a link
+            const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.querySelector('.material-symbols-outlined').textContent = 'menu';
+                });
+            });
+        }
+
+        // Form Submission - Telegram Bot Mock
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const originalContent = btn.innerHTML;
+            
+            // Validate Phone
+            const phone = document.getElementById('cusPhone').value;
+            if(!/^[0-9]{10,11}$/.test(phone)) {
+                alert('Khách hàng vui lòng nhập đúng số điện thoại (10 hoặc 11 số)!');
+                return;
+            }
+
+            // Loading state
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin font-bold">autorenew</span> Đang gửi...';
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            btn.disabled = true;
+
+            // Lấy dữ liệu
+            const name = document.getElementById('cusName').value;
+            const service = document.getElementById('cusService').value;
+            const address = document.getElementById('cusAddress').value;
+
+            /* =========================================================
+             * HƯỚNG DẪN DÀNH CHO BẠN FRESHER DEV CỦA ANH THÀNH:
+             * 
+             * 1. Lấy Token Bot từ BotFather (Telegram): '12345678:ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+             * 2. Lấy Chat ID của nhóm/Cá nhân: '-100xxxxxxx' hoặc '123xxxx'
+             * 3. Thay vào 2 hằng số bên dưới:
+             ===========================================================*/
+            
+            const BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; 
+            const CHAT_ID = 'YOUR_CHAT_ID_HERE';
+            
+            const textMsg = `🔔 <b>CÓ ĐƠN GIẶT MỚI TỪ WEBSITE!</b>\n\n` +
+                            `👤 <b>Khách hàng:</b> ${name}\n` +
+                            `📞 <b>SĐT:</b> ${phone}\n` +
+                            `👕 <b>Dịch vụ:</b> ${service}\n` +
+                            `📍 <b>Địa chỉ:</b> ${address}\n\n` +
+                            `<i>(Nhân viên vui lòng gọi lại khách để xác nhận ngay!)</i>`;
+            
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            
+            /* GHI CHÚ: 
+               Đoạn fetch bên dưới đang bị comment lại, khi nào ráp Token thật thì Uncomment ra nhé.
+            */
+            
+            /*
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: textMsg,
+                    parse_mode: 'HTML'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.ok) {
+                    alert('Gửi yêu cầu thành công! Nhân viên Bầu Thịnh sẽ liên hệ lại ngay ạ.');
+                    document.getElementById('bookingForm').reset();
+                } else {
+                    alert('Có lỗi xảy ra từ máy chủ, anh/chị vui lòng gọi Hotline nhé!');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Lỗi kết nối. Vui lòng gọi trực tiếp Hotline giúp tiệm ạ!');
+            })
+            .finally(() => {
+                // Restore button
+                btn.innerHTML = originalContent;
+                btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                btn.disabled = false;
+            });
+            */
+            
+            // MOCK BEHAVIOR (Giả lập hiệu ứng chờ 1.5s rồi báo thành công)
+            setTimeout(() => {
+                alert('Gửi yêu cầu nhận đồ thành công! (Lưu ý: Đây là thông báo giả lập. Vui lòng điền Bot Token vào Source code)');
+                document.getElementById('bookingForm').reset();
+                
+                // Khôi phục nút
+                btn.innerHTML = originalContent;
+                btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                btn.disabled = false;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

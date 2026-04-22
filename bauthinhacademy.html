@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BẦU THỊNH ACADEMY – Hệ Thống Học Tập Trading</title>
+    <meta name="description" content="Hệ thống học tập Micro-learning từ Decane & Bầu Thịnh. Học Trading thực chiến với video ngắn, cấu trúc khoa học.">
+
+    <!-- Dependencies -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ═══════════════════════════════════════════════
+           DESIGN SYSTEM – DECANE / BẦU THỊNH ACADEMY
+           ═══════════════════════════════════════════════ */
+        :root {
+            --da-primary: #eab308;
+            --da-primary-hover: #ca8a04;
+            --da-primary-glow: rgba(234, 179, 8, 0.15);
+            --da-accent: #22c55e;
+            --da-accent-glow: rgba(34, 197, 94, 0.15);
+            --da-danger: #ef4444;
+            --da-bg-deep: #0a0f1e;
+            --da-bg: #0f172a;
+            --da-bg-card: #1e293b;
+            --da-bg-card-hover: #253449;
+            --da-bg-sidebar: #111827;
+            --da-border: rgba(255, 255, 255, 0.06);
+            --da-border-active: rgba(234, 179, 8, 0.5);
+            --da-text: #f1f5f9;
+            --da-text-muted: #94a3b8;
+            --da-text-subtle: #64748b;
+            --da-radius: 12px;
+            --da-radius-sm: 8px;
+            --da-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --sidebar-width: 360px;
+            --topbar-height: 56px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--da-bg-deep);
+            color: var(--da-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            line-height: 1.3;
+        }
+
+        /* ═══════════════════
+           SCROLLBAR CUSTOM
+           ═══════════════════ */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.12);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+        /* ═══════════════════
+           TOP BAR
+           ═══════════════════ */
+        .topbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--topbar-height);
+            background: rgba(10, 15, 30, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--da-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 1000;
+        }
+
+        .topbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .topbar-brand i {
+            color: var(--da-primary);
+            font-size: 18px;
+        }
+
+        .topbar-brand span {
+            background: linear-gradient(135deg, var(--da-primary), #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .topbar-progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--da-text-muted);
+        }
+
+        .topbar-progress-bar {
+            width: 120px;
+            height: 6px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .topbar-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--da-primary), var(--da-accent));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .btn-sidebar-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--da-border);
+            color: var(--da-text);
+            width: 40px;
+            height: 40px;
+            border-radius: var(--da-radius-sm);
+            cursor: pointer;
+            font-size: 16px;
+            transition: var(--da-transition);
+        }
+
+        .btn-sidebar-toggle:hover {
+            background: var(--da-bg-card);
+            border-color: var(--da-border-active);
+        }
+
+        /* ═══════════════════
+           LAYOUT
+           ═══════════════════ */
+        .lms-layout {
+            display: flex;
+            padding-top: var(--topbar-height);
+            min-height: 100vh;
+        }
+
+        /* ═══════════════════
+           SIDEBAR
+           ═══════════════════ */
+        .sidebar {
+            width: var(--sidebar-width);
+            min-width: var(--sidebar-width);
+            background: var(--da-bg-sidebar);
+            border-right: 1px solid var(--da-border);
+            height: calc(100vh - var(--topbar-height));
+            position: sticky;
+            top: var(--topbar-height);
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: transform var(--da-transition);
+            z-index: 500;
+        }
+
+        .sidebar-header {
+            padding: 20px 20px 16px;
+            border-bottom: 1px solid var(--da-border);
+        }
+
+        .sidebar-header h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--da-text-muted);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            color: var(--da-text-subtle);
+        }
+
+        .sidebar-nav {
+            padding: 8px 0;
+        }
+
+        /* Module (Phần) */
+        .module-item {
+            border-bottom: 1px solid var(--da-border);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: var(--da-transition);
+            user-select: none;
+        }
+
+        .module-header:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .module-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .module-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--da-radius-sm);
+            background: var(--da-primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--da-primary);
+            font-size: 13px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .module-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--da-text);
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .module-chevron {
+            color: var(--da-text-subtle);
+            font-size: 12px;
+            transition: transform var(--da-transition);
+            flex-shrink: 0;
+        }
+
+        .module-item.expanded .module-chevron {
+            transform: rotate(90deg);
+        }
+
+        .module-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .module-item.expanded .module-body {
+            max-height: 2000px;
+        }
+
+        /* Chapter (Chương) */
+        .chapter-item {
+            padding-left: 20px;
+        }
+
+        .chapter-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px 10px 12px;
+            cursor: pointer;
+            transition: var(--da-transition);
+            user-select: none;
+        }
+
+        .chapter-header:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .chapter-icon {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--da-text-subtle);
+            flex-shrink: 0;
+            transition: var(--da-transition);
+        }
+
+        .chapter-item.expanded .chapter-icon {
+            background: var(--da-primary);
+            box-shadow: 0 0 8px var(--da-primary-glow);
+        }
+
+        .chapter-title {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--da-text-muted);
+            flex: 1;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chapter-chevron {
+            font-size: 10px;
+            color: var(--da-text-subtle);
+            transition: transform var(--da-transition);
+        }
+
+        .chapter-item.expanded .chapter-chevron {
+            transform: rotate(90deg);
+        }
+
+        .chapter-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+
+        .chapter-item.expanded .chapter-body {
+            max-height: 1000px;
+        }
+
+        /* Lesson (Mục) */
+        .lesson-item {
+            padding-left: 28px;
+        }
+
+        .lesson-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 16px 9px 12px;
+            width: 100%;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: var(--da-transition);
+            text-align: left;
+            border-left: 2px solid transparent;
+        }
+
+        .lesson-btn:hover {
+            background: rgba(255,255,255,0.04);
+        }
+
+        .lesson-btn.active {
+            background: var(--da-primary-glow);
+            border-left-color: var(--da-primary);
+        }
+
+        .lesson-btn.completed .lesson-status {
+            background: var(--da-accent);
+            border-color: var(--da-accent);
+            color: #fff;
+        }
+
+        .lesson-status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--da-text-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 9px;
+            color: transparent;
+            transition: var(--da-transition);
+        }
+
+        .lesson-btn.active .lesson-status {
+            border-color: var(--da-primary);
+            background: var(--da-primary-glow);
+        }
+
+        .lesson-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .lesson-name {
+            font-size: 12.5px;
+            font-weight: 500;
+            color: var(--da-text-muted);
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: var(--da-transition);
+        }
+
+        .lesson-btn.active .lesson-name {
+            color: var(--da-text);
+            font-weight: 600;
+        }
+
+        .lesson-btn.completed .lesson-name {
+            color: var(--da-text-muted);
+        }
+
+        .lesson-duration {
+            font-size: 11px;
+            color: var(--da-text-subtle);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 2px;
+        }
+
+        /* ═══════════════════
+           MAIN CONTENT
+           ═══════════════════ */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-wrapper {
+            max-width: 960px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 32px 40px 60px;
+        }
+
+        /* Lesson Header */
+        .lesson-header {
+            margin-bottom: 24px;
+        }
+
+        .lesson-breadcrumb {
+            font-size: 12px;
+            color: var(--da-text-subtle);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .lesson-breadcrumb span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lesson-breadcrumb .separator {
+            color: var(--da-text-subtle);
+            font-size: 10px;
+        }
+
+        .lesson-main-title {
+            font-size: 1.6rem;
+            color: var(--da-text);
+            margin-bottom: 6px;
+        }
+
+        .lesson-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--da-text-subtle);
+        }
+
+        .lesson-meta i {
+            margin-right: 4px;
+        }
+
+        /* Video Player */
+        .video-container {
+            position: relative;
+            width: 100%;
+            border-radius: var(--da-radius);
+            overflow: hidden;
+            background: #000;
+            border: 1px solid var(--da-border);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255,255,255,0.03),
+                0 0 80px var(--da-primary-glow);
+            margin-bottom: 24px;
+        }
+
+        .video-container::before {
+            content: '';
+            display: block;
+            padding-top: 56.25%; /* 16:9 */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Key Notes */
+        .key-notes {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.06), rgba(234, 179, 8, 0.02));
+            border: 1px solid rgba(234, 179, 8, 0.15);
+            border-left: 4px solid var(--da-primary);
+            border-radius: 0 var(--da-radius) var(--da-radius) 0;
+            padding: 20px 24px;
+            margin-bottom: 24px;
+        }
+
+        .key-notes-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--da-primary);
+            margin-bottom: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .key-notes-title i {
+            font-size: 16px;
+        }
+
+        .key-notes ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-notes li {
+            position: relative;
+            padding: 6px 0 6px 20px;
+            font-size: 14px;
+            color: var(--da-text-muted);
+            line-height: 1.6;
+        }
+
+        .key-notes li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--da-primary);
+            font-weight: 700;
+        }
+
+        /* Lesson Actions */
+        .lesson-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .btn-complete {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: var(--da-radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--da-transition);
+            border: 2px solid var(--da-accent);
+            background: var(--da-accent-glow);
+            color: var(--da-accent);
+        }
+
+        .btn-complete:hover {
+            background: var(--da-accent);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-complete.is-completed {
+            background: var(--da-accent);
+            color: #fff;
+            border-color: var(--da-accent);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-nav {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 20px;
+            border-radius: var(--da-radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--da-transition);
+            border: 1px solid var(--da-border);
+            background: var(--da-bg-card);
+            color: var(--da-text-muted);
+            text-decoration: none;
+        }
+
+        .btn-nav:hover {
+            background: var(--da-bg-card-hover);
+            color: var(--da-text);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .btn-nav.primary {
+            background: var(--da-primary);
+            color: var(--da-bg);
+            border-color: var(--da-primary);
+        }
+
+        .btn-nav.primary:hover {
+            background: var(--da-primary-hover);
+            box-shadow: 0 4px 16px rgba(234, 179, 8, 0.3);
+        }
+
+        .btn-nav:disabled, .btn-nav[disabled] {
+            opacity: 0.35;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Take Note */
+        .note-section {
+            background: var(--da-bg-card);
+            border: 1px solid var(--da-border);
+            border-radius: var(--da-radius);
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .note-section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .note-section-title h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--da-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .note-section-title h4 i {
+            color: var(--da-primary);
+        }
+
+        .note-saved-indicator {
+            font-size: 11px;
+            color: var(--da-accent);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .note-saved-indicator.show {
+            opacity: 1;
+        }
+
+        .note-textarea {
+            width: 100%;
+            min-height: 100px;
+            background: var(--da-bg);
+            border: 1px solid var(--da-border);
+            border-radius: var(--da-radius-sm);
+            padding: 14px 16px;
+            color: var(--da-text);
+            font-family: 'Inter', sans-serif;
+            font-size: 13.5px;
+            line-height: 1.6;
+            resize: vertical;
+            transition: border-color var(--da-transition);
+        }
+
+        .note-textarea::placeholder {
+            color: var(--da-text-subtle);
+        }
+
+        .note-textarea:focus {
+            outline: none;
+            border-color: var(--da-primary);
+            box-shadow: 0 0 0 3px var(--da-primary-glow);
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - var(--topbar-height) - 80px);
+            text-align: center;
+            padding: 40px;
+        }
+
+        .welcome-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--da-primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .welcome-icon i {
+            font-size: 32px;
+            color: var(--da-primary);
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.2); }
+            50% { box-shadow: 0 0 0 20px rgba(234, 179, 8, 0); }
+        }
+
+        .welcome-screen h2 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            color: var(--da-text);
+        }
+
+        .welcome-screen p {
+            font-size: 15px;
+            color: var(--da-text-muted);
+            max-width: 500px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .btn-start {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: var(--da-primary);
+            color: var(--da-bg);
+            border: none;
+            border-radius: var(--da-radius-sm);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--da-transition);
+            box-shadow: 0 8px 24px rgba(234, 179, 8, 0.25);
+        }
+
+        .btn-start:hover {
+            background: var(--da-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(234, 179, 8, 0.4);
+        }
+
+        /* ═══════════════════
+           OVERLAY (MOBILE)
+           ═══════════════════ */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 499;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* ═══════════════════
+           RESPONSIVE
+           ═══════════════════ */
+        @media (max-width: 992px) {
+            .sidebar {
+                position: fixed;
+                top: var(--topbar-height);
+                left: 0;
+                height: calc(100vh - var(--topbar-height));
+                transform: translateX(-100%);
+                z-index: 500;
+                box-shadow: 10px 0 40px rgba(0,0,0,0.5);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .btn-sidebar-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .content-wrapper {
+                padding: 24px 20px 60px;
+            }
+
+            .topbar-progress {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            :root {
+                --sidebar-width: 300px;
+            }
+
+            .lesson-main-title {
+                font-size: 1.3rem;
+            }
+
+            .lesson-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-buttons {
+                justify-content: space-between;
+            }
+
+            .btn-nav {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .welcome-screen h2 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* ═══════════════════
+           ANIMATIONS
+           ═══════════════════ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.35s ease forwards;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════ TOP BAR ═══════════ -->
+    <header class="topbar" id="topbar">
+        <div style="display:flex;align-items:center;gap:16px;">
+            <button class="btn-sidebar-toggle" id="btnSidebarToggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="bauthinh.html" class="topbar-brand">
+                <i class="fas fa-layer-group"></i>
+                <span>BẦU THỊNH ACADEMY</span>
+            </a>
+        </div>
+        <div class="topbar-right">
+            <div class="topbar-progress">
+                <div class="topbar-progress-bar">
+                    <div class="topbar-progress-fill" id="progressFill"></div>
+                </div>
+                <span id="progressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════════ SIDEBAR OVERLAY (MOBILE) ═══════════ -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ═══════════ MAIN LAYOUT ═══════════ -->
+    <div class="lms-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Nội dung khóa học</h3>
+                <p id="sidebarProgressInfo">0 / 0 bài đã hoàn thành</p>
+            </div>
+            <nav class="sidebar-nav" id="sidebarNav">
+                <!-- JS sẽ render nội dung ở đây -->
+            </nav>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main-content" id="mainContent">
+            <!-- Welcome screen hoặc Lesson content sẽ được render bởi JS -->
+        </main>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         COURSE DATA
+         ═══════════════════════════════════════════════
+         ★ ANH THÀNH: ĐỂ THÊM/SỬA BÀI HỌC, CHỈ CẦN CHỈNH MẢNG NÀY ★
+         - Thêm video: copy 1 object lesson, đổi id/title/video/notes
+         - Thêm chương: copy 1 object chapter, đổi id/title, thêm lessons
+         - Thêm phần:  copy 1 object module, đổi id/title, thêm chapters
+         ═══════════════════════════════════════════════ -->
+    <script>
+    const COURSE_DATA = [
+        {
+            id: "module-1",
+            title: "PHẦN 1: TƯ DUY VÀ NỀN TẢNG GIAO DỊCH",
+            chapters: [
+                {
+                    id: "ch-1-1",
+                    title: "Chương 1: Khởi đầu cùng Decane & Bầu Thịnh",
+                    lessons: [
+                        {
+                            id: "lesson-1-1-1",
+                            title: "Giới thiệu lộ trình học tập",
+                            duration: "4 phút",
+                            video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+                            notes: [
+                                "Xem video theo đúng thứ tự, không nhảy cóc.",
+                                "Mỗi ngày chỉ nên học tối đa 3-5 mục để ngấm kiến thức.",
+                                "Ghi chú lại những ý quan trọng ngay dưới phần 'Ghi chú cá nhân'."
+                            ]
+                        },
+                        {
+                            id: "lesson-1-1-2",
+                            title: "Tại sao phải là Trading thực chiến?",
+                            duration: "5 phút",
+                            video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+                            notes: [
+                                "Trading không phải là cờ bạc nếu có hệ thống quản trị rủi ro.",
+                                "Mục tiêu là sự bền vững, không phải làm giàu sau một đêm.",
+                                "Luôn đặt câu hỏi: 'Nếu thua lệnh này, mình mất bao nhiêu?'"
+                            ]
+                        },
+                        {
+                            id: "lesson-1-1-3",
+                            title: "Cách đọc biểu đồ nến cơ bản",
+                            duration: "5 phút",
+                            video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+                            notes: [
+                                "Nến xanh (Bull) = Giá tăng. Nến đỏ (Bear) = Giá giảm.",
+                                "Bóng nến (Shadow) thể hiện áp lực mua/bán.",
+                                "Cơ bản nhưng CỰC KỲ quan trọng – nắm vững trước khi đi tiếp."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "ch-1-2",
+                    title: "Chương 2: Thiết lập công cụ (Tools Setup)",
+                    lessons: [
+                        {
+                            id: "lesson-1-2-1",
+                            title: "Cài đặt và bảo mật tài khoản sàn",
+                            duration: "4 phút",
+                            video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+                            notes: [
+                                "Luôn bật bảo mật 2 lớp (2FA) – Google Authenticator.",
+                                "Sử dụng Link Ref từ Decane để được hỗ trợ vào nhóm VIP.",
+                                "Không bao giờ chia sẻ mã OTP hoặc Private Key cho bất kỳ ai."
+                            ]
+                        },
+                        {
+                            id: "lesson-1-2-2",
+                            title: "Hướng dẫn cài đặt TradingView",
+                            duration: "3 phút",
+                            video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+                            notes: [
+                                "Tải TradingView trên web hoặc app tùy thiết bị.",
+                                "Đăng nhập bằng tài khoản Premium được cấp.",
+                                "Cài đặt layout mặc định theo hướng dẫn của Decane."
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "module-2",
+            title: "PHẦN 2: PHÂN TÍCH KỸ THUẬT DECANE STYLE",
+            chapters: [
+                {
+                    id: "ch-2-1",
+                    title: "Chương 3: Cấu trúc thị trường (Market Structure)",
+                    lessons: [
+                        {
+                            id: "lesson-2-1-1",
+                            title: "Xác định xu hướng chính (Trend)",
+                            duration: "5 phút",
+                            video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+                            notes: [
+                                "Uptrend: Higher High (HH) + Higher Low (HL).",
+                                "Downtrend: Lower High (LH) + Lower Low (LL).",
+                                "Luôn giao dịch thuận xu hướng – 'Trend is your friend.'"
+                            ]
+                        },
+                        {
+                            id: "lesson-2-1-2",
+                            title: "Vùng Supply & Demand thực chiến",
+                            duration: "5 phút",
+                            video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+                            notes: [
+                                "Supply = Vùng cung (giá có khả năng giảm).",
+                                "Demand = Vùng cầu (giá có khả năng tăng).",
+                                "Chỉ vào lệnh tại vùng có thanh khoản cao."
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "ch-2-2",
+                    title: "Chương 4: Mô hình nến & Price Action",
+                    lessons: [
+                        {
+                            id: "lesson-2-2-1",
+                            title: "Top 5 mô hình nến đảo chiều",
+                            duration: "4 phút",
+                            video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+                            notes: [
+                                "Hammer, Engulfing, Doji, Morning/Evening Star, Pin Bar.",
+                                "Mô hình chỉ có giá trị khi xuất hiện tại vùng key level.",
+                                "Kết hợp Volume để xác nhận tín hiệu."
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "module-3",
+            title: "PHẦN 3: HỆ THỐNG VÀO LỆNH & QUẢN TRỊ RỦI RO",
+            chapters: [
+                {
+                    id: "ch-3-1",
+                    title: "Chương 5: Position Sizing & Risk Management",
+                    lessons: [
+                        {
+                            id: "lesson-3-1-1",
+                            title: "Công thức tính khối lượng vị thế",
+                            duration: "5 phút",
+                            video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+                            notes: [
+                                "Quy tắc vàng: Không bao giờ rủi ro quá 1-2% tài khoản cho 1 lệnh.",
+                                "Công thức: Lot Size = (Balance × Risk%) / (SL pips × Pip Value).",
+                                "Luôn đặt SL trước khi tính TP."
+                            ]
+                        },
+                        {
+                            id: "lesson-3-1-2",
+                            title: "Kỹ thuật đặt Stop Loss an toàn",
+                            duration: "4 phút",
+                            video: "https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0",
+                            notes: [
+                                "SL đặt sau vùng Supply/Demand, không đặt sát entry.",
+                                "Tránh bị 'quét râu' bằng cách thêm buffer 5-10 pips.",
+                                "Trailing Stop: kéo SL theo lợi nhuận để bảo toàn vốn."
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ];
+
+    /* ═══════════════════════════════════════════════
+       ENGINE – KHÔNG CẦN SỬA PHẦN NÀY
+       ═══════════════════════════════════════════════ */
+
+    // Flatten all lessons for easy navigation
+    function flattenLessons() {
+        const list = [];
+        COURSE_DATA.forEach(mod => {
+            mod.chapters.forEach(ch => {
+                ch.lessons.forEach(lesson => {
+                    list.push({
+                        ...lesson,
+                        moduleTitle: mod.title,
+                        chapterTitle: ch.title,
+                        moduleId: mod.id,
+                        chapterId: ch.id
+                    });
+                });
+            });
+        });
+        return list;
+    }
+
+    const allLessons = flattenLessons();
+    let currentLessonIndex = -1;
+
+    // LocalStorage helpers
+    const STORAGE_KEY = 'bauthinhAcademy';
+    function getStorageData() {
+        try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        } catch { return {}; }
+    }
+    function saveStorageData(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+    function isLessonCompleted(lessonId) {
+        const data = getStorageData();
+        return data.completed && data.completed[lessonId] === true;
+    }
+    function toggleLessonCompleted(lessonId) {
+        const data = getStorageData();
+        if (!data.completed) data.completed = {};
+        data.completed[lessonId] = !data.completed[lessonId];
+        saveStorageData(data);
+        return data.completed[lessonId];
+    }
+    function getLessonNote(lessonId) {
+        const data = getStorageData();
+        return (data.notes && data.notes[lessonId]) || '';
+    }
+    function saveLessonNote(lessonId, text) {
+        const data = getStorageData();
+        if (!data.notes) data.notes = {};
+        data.notes[lessonId] = text;
+        saveStorageData(data);
+    }
+
+    // Count completed
+    function getCompletedCount() {
+        const data = getStorageData();
+        if (!data.completed) return 0;
+        return Object.values(data.completed).filter(v => v).length;
+    }
+
+    // Update progress UI
+    function updateProgress() {
+        const total = allLessons.length;
+        const done = getCompletedCount();
+        const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressText').textContent = pct + '%';
+        document.getElementById('sidebarProgressInfo').textContent =
+            `${done} / ${total} bài đã hoàn thành`;
+    }
+
+    // Render Sidebar
+    function renderSidebar() {
+        const nav = document.getElementById('sidebarNav');
+        let html = '';
+
+        COURSE_DATA.forEach((mod, mi) => {
+            const isFirstModule = mi === 0;
+            html += `<div class="module-item${isFirstModule ? ' expanded' : ''}" data-module="${mod.id}">`;
+            html += `<div class="module-header" onclick="toggleModule('${mod.id}')">`;
+            html += `  <div class="module-header-left">`;
+            html += `    <div class="module-icon">P${mi + 1}</div>`;
+            html += `    <span class="module-title" title="${mod.title}">${mod.title}</span>`;
+            html += `  </div>`;
+            html += `  <i class="fas fa-chevron-right module-chevron"></i>`;
+            html += `</div>`;
+            html += `<div class="module-body">`;
+
+            mod.chapters.forEach((ch, ci) => {
+                const isFirstChapter = isFirstModule && ci === 0;
+                html += `<div class="chapter-item${isFirstChapter ? ' expanded' : ''}" data-chapter="${ch.id}">`;
+                html += `  <div class="chapter-header" onclick="toggleChapter('${ch.id}')">`;
+                html += `    <span class="chapter-icon"></span>`;
+                html += `    <span class="chapter-title" title="${ch.title}">${ch.title}</span>`;
+                html += `    <i class="fas fa-chevron-right chapter-chevron"></i>`;
+                html += `  </div>`;
+                html += `  <div class="chapter-body">`;
+
+                ch.lessons.forEach(lesson => {
+                    const completed = isLessonCompleted(lesson.id);
+                    html += `<div class="lesson-item">`;
+                    html += `  <button class="lesson-btn${completed ? ' completed' : ''}" data-lesson="${lesson.id}" onclick="loadLesson('${lesson.id}')">`;
+                    html += `    <span class="lesson-status"><i class="fas fa-check"></i></span>`;
+                    html += `    <span class="lesson-info">`;
+                    html += `      <span class="lesson-name">${lesson.title}</span>`;
+                    html += `      <span class="lesson-duration"><i class="far fa-clock"></i>${lesson.duration}</span>`;
+                    html += `    </span>`;
+                    html += `  </button>`;
+                    html += `</div>`;
+                });
+
+                html += `  </div>`;
+                html += `</div>`;
+            });
+
+            html += `</div>`;
+            html += `</div>`;
+        });
+
+        nav.innerHTML = html;
+    }
+
+    // Toggle accordion
+    function toggleModule(moduleId) {
+        const el = document.querySelector(`[data-module="${moduleId}"]`);
+        if (el) el.classList.toggle('expanded');
+    }
+
+    function toggleChapter(chapterId) {
+        const el = document.querySelector(`[data-chapter="${chapterId}"]`);
+        if (el) el.classList.toggle('expanded');
+    }
+
+    // Load lesson
+    function loadLesson(lessonId) {
+        const idx = allLessons.findIndex(l => l.id === lessonId);
+        if (idx === -1) return;
+
+        currentLessonIndex = idx;
+        const lesson = allLessons[idx];
+        const completed = isLessonCompleted(lesson.id);
+        const note = getLessonNote(lesson.id);
+
+        const hasPrev = idx > 0;
+        const hasNext = idx < allLessons.length - 1;
+
+        const main = document.getElementById('mainContent');
+        main.innerHTML = `
+            <div class="content-wrapper animate-in">
+                <!-- Breadcrumb -->
+                <div class="lesson-header">
+                    <div class="lesson-breadcrumb">
+                        <span>${lesson.moduleTitle.replace(/PHẦN \d+: /, '')}</span>
+                        <i class="fas fa-chevron-right separator"></i>
+                        <span>${lesson.chapterTitle.replace(/Chương \d+: /, '')}</span>
+                    </div>
+                    <h1 class="lesson-main-title">${lesson.title}</h1>
+                    <div class="lesson-meta">
+                        <span><i class="far fa-clock"></i>${lesson.duration}</span>
+                        <span><i class="fas fa-signal"></i>Micro-learning</span>
+                    </div>
+                </div>
+
+                <!-- Video -->
+                <div class="video-container">
+                    <iframe
+                        src="${lesson.video}"
+                        title="${lesson.title}"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <!-- Key Notes -->
+                <div class="key-notes">
+                    <div class="key-notes-title">
+                        <i class="fas fa-lightbulb"></i>
+                        LƯU Ý QUAN TRỌNG
+                    </div>
+                    <ul>
+                        ${lesson.notes.map(n => `<li>${n}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <!-- Actions -->
+                <div class="lesson-actions">
+                    <button class="btn-complete ${completed ? 'is-completed' : ''}" id="btnComplete" onclick="handleComplete('${lesson.id}')">
+                        <i class="fas ${completed ? 'fa-check-circle' : 'fa-circle'}"></i>
+                        <span>${completed ? 'Đã hoàn thành ✓' : 'Đánh dấu hoàn thành'}</span>
+                    </button>
+                    <div class="nav-buttons">
+                        <button class="btn-nav" ${!hasPrev ? 'disabled' : ''} onclick="navLesson(-1)">
+                            <i class="fas fa-arrow-left"></i> Bài trước
+                        </button>
+                        <button class="btn-nav primary" ${!hasNext ? 'disabled' : ''} onclick="navLesson(1)">
+                            Bài tiếp theo <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Take Note -->
+                <div class="note-section">
+                    <div class="note-section-title">
+                        <h4><i class="fas fa-pen-fancy"></i> Ghi chú cá nhân</h4>
+                        <span class="note-saved-indicator" id="noteSaved">
+                            <i class="fas fa-check-circle"></i> Đã lưu
+                        </span>
+                    </div>
+                    <textarea
+                        class="note-textarea"
+                        id="noteArea"
+                        placeholder="Viết ghi chú của bạn cho bài học này... (tự động lưu vào trình duyệt)"
+                        oninput="handleNoteInput('${lesson.id}')"
+                    >${note}</textarea>
+                </div>
+            </div>
+        `;
+
+        // Update sidebar active state
+        document.querySelectorAll('.lesson-btn').forEach(btn => btn.classList.remove('active'));
+        const activeBtn = document.querySelector(`[data-lesson="${lessonId}"]`);
+        if (activeBtn) activeBtn.classList.add('active');
+
+        // Auto-expand parent accordion
+        const moduleEl = document.querySelector(`[data-module="${lesson.moduleId}"]`);
+        if (moduleEl) moduleEl.classList.add('expanded');
+        const chapterEl = document.querySelector(`[data-chapter="${lesson.chapterId}"]`);
+        if (chapterEl) chapterEl.classList.add('expanded');
+
+        // Close mobile sidebar
+        closeSidebar();
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Navigate prev/next
+    function navLesson(dir) {
+        const newIdx = currentLessonIndex + dir;
+        if (newIdx >= 0 && newIdx < allLessons.length) {
+            loadLesson(allLessons[newIdx].id);
+        }
+    }
+
+    // Handle complete toggle
+    function handleComplete(lessonId) {
+        const isCompleted = toggleLessonCompleted(lessonId);
+        const btn = document.getElementById('btnComplete');
+
+        if (isCompleted) {
+            btn.classList.add('is-completed');
+            btn.innerHTML = '<i class="fas fa-check-circle"></i><span>Đã hoàn thành ✓</span>';
+        } else {
+            btn.classList.remove('is-completed');
+            btn.innerHTML = '<i class="fas fa-circle"></i><span>Đánh dấu hoàn thành</span>';
+        }
+
+        // Update sidebar lesson status
+        const sidebarBtn = document.querySelector(`[data-lesson="${lessonId}"]`);
+        if (sidebarBtn) {
+            sidebarBtn.classList.toggle('completed', isCompleted);
+        }
+
+        updateProgress();
+    }
+
+    // Handle note input with debounced save
+    let noteTimeout;
+    function handleNoteInput(lessonId) {
+        const text = document.getElementById('noteArea').value;
+        clearTimeout(noteTimeout);
+        noteTimeout = setTimeout(() => {
+            saveLessonNote(lessonId, text);
+            const indicator = document.getElementById('noteSaved');
+            indicator.classList.add('show');
+            setTimeout(() => indicator.classList.remove('show'), 1500);
+        }, 500);
+    }
+
+    // Welcome screen
+    function showWelcome() {
+        const main = document.getElementById('mainContent');
+        const total = allLessons.length;
+        const done = getCompletedCount();
+
+        main.innerHTML = `
+            <div class="welcome-screen animate-in">
+                <div class="welcome-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h2>Chào mừng đến Bầu Thịnh Academy</h2>
+                <p>Hệ thống học tập Micro-learning – mỗi bài chỉ từ 3-5 phút. Học đúng thứ tự, ghi chú & đánh dấu tiến độ để đạt hiệu quả tối đa.</p>
+                ${done > 0
+                    ? `<p style="color:var(--da-accent);font-size:13px;margin-top:-16px;margin-bottom:24px">
+                        <i class="fas fa-chart-line" style="margin-right:4px"></i>
+                        Bạn đã hoàn thành ${done}/${total} bài học
+                       </p>`
+                    : ''
+                }
+                <button class="btn-start" onclick="loadLesson('${allLessons[0].id}')">
+                    <i class="fas fa-play"></i>
+                    ${done > 0 ? 'Tiếp tục học' : 'Bắt đầu học ngay'}
+                </button>
+            </div>
+        `;
+    }
+
+    // Sidebar toggle (mobile)
+    function openSidebar() {
+        document.getElementById('sidebar').classList.add('open');
+        document.getElementById('sidebarOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+        renderSidebar();
+        updateProgress();
+        showWelcome();
+
+        document.getElementById('btnSidebarToggle').addEventListener('click', () => {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+        });
+
+        document.getElementById('sidebarOverlay').addEventListener('click', closeSidebar);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'TEXTAREA') return;
+            if (e.key === 'ArrowLeft') navLesson(-1);
+            if (e.key === 'ArrowRight') navLesson(1);
+        });
+    });
+    </script>
+
+</body>
+</html>
