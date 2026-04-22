@@ -38,7 +38,7 @@ const DECANE_CONFIG = {
         registerForm: "https://forms.gle/your_form_link",
         
         // Internal Links
-        page1: "bauthinh.html",
+        page1: "index.html",
         page2: "bauthinhacademy.html"
     }
 };
