@@ -39,7 +39,7 @@ const DCA_CONFIG = {
         
         // Internal Links
         page1: "index.html",
-        page2: "bauthinhacademy.html"
+        page2: "course.html"
     }
 };
 
