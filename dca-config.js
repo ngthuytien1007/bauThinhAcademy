@@ -1,10 +1,10 @@
 // =====================================================================
-// CẤU HÌNH DECANE ECOSYSTEM - BAUTHINH
+// CẤU HÌNH DCA ECOSYSTEM - BAUTHINH (Dollar-Cost Averaging)
 // Anh có thể chỉnh sửa màu sắc, giá, và tất cả các link tại file này
 // thay vì phải tìm trong code HTML.
 // =====================================================================
 
-const DECANE_CONFIG = {
+const DCA_CONFIG = {
     // 1. CẤU HÌNH MÀU SẮC (Dùng mã HEX)
     colors: {
         primary: "#eab308",       // Màu Vàng Gold (sang trọng)
@@ -49,17 +49,17 @@ const DECANE_CONFIG = {
 document.addEventListener("DOMContentLoaded", () => {
     // 1. Áp dụng biến CSS cho Màu sắc
     const root = document.documentElement;
-    root.style.setProperty('--decane-primary', DECANE_CONFIG.colors.primary);
-    root.style.setProperty('--decane-primary-hover', DECANE_CONFIG.colors.primaryHover);
-    root.style.setProperty('--decane-accent', DECANE_CONFIG.colors.accent);
-    root.style.setProperty('--decane-bg', DECANE_CONFIG.colors.bgDark);
-    root.style.setProperty('--decane-card', DECANE_CONFIG.colors.cardBg);
-    root.style.setProperty('--decane-text', DECANE_CONFIG.colors.textMain);
+    root.style.setProperty('--dca-primary', DCA_CONFIG.colors.primary);
+    root.style.setProperty('--dca-primary-hover', DCA_CONFIG.colors.primaryHover);
+    root.style.setProperty('--dca-accent', DCA_CONFIG.colors.accent);
+    root.style.setProperty('--dca-bg', DCA_CONFIG.colors.bgDark);
+    root.style.setProperty('--dca-card', DCA_CONFIG.colors.cardBg);
+    root.style.setProperty('--dca-text', DCA_CONFIG.colors.textMain);
 
     // 2. Chèn tự động dữ liệu Text và Link vào HTML
     document.querySelectorAll('[data-config]').forEach(el => {
         const keyPath = el.getAttribute('data-config').split('.');
-        let val = DECANE_CONFIG;
+        let val = DCA_CONFIG;
         keyPath.forEach(key => { if(val) val = val[key]; });
         
         if (val) {
@@ -72,6 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 3. Tự động hiển thị Giá + Loại Tiền tệ
-    const priceText = `${DECANE_CONFIG.pricing.amount} ${DECANE_CONFIG.pricing.currency}`;
-    document.querySelectorAll('.decane-price').forEach(el => el.innerText = priceText);
+    const priceText = `${DCA_CONFIG.pricing.amount} ${DCA_CONFIG.pricing.currency}`;
+    document.querySelectorAll('.dca-price').forEach(el => el.innerText = priceText);
 });
