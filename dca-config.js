@@ -27,15 +27,15 @@ const DCA_CONFIG = {
         teleFreeGroup: "https://t.me/docco_anhnen",
         
         // Link Sàn (Ref)
-        mexcRef: "https://mexc.com/register?inviteCode=your_code",
-        bingxRef: "https://bingx.com/invite/your_code",
+        mexcRef: "https://mexc.com/register?inviteCode=1P7gU",
+        bingxRef: "https://bingx.com/invite/qKkUvP",
         
         // Liên hệ Admin
         zaloAdmin: "https://zalo.me/0795777607",
         teleAdmin: "https://t.me/docco_anhnen",
         
         // Form tư vấn / Chạy Automation n8n
-        registerForm: "https://forms.gle/your_form_link",
+        registerForm: "https://forms.gle/Q`8Hh9nB5z5y4c4R69",
         
         // Internal Links
         page1: "index.html",
